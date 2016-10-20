@@ -1,0 +1,191 @@
+-- phpMyAdmin SQL Dump
+-- version 3.0.1.1
+-- http://www.phpmyadmin.net
+--
+-- 主机: localhost
+-- 生成日期: 2013 年 01 月 25 日 08:39
+-- 服务器版本: 5.1.29
+-- PHP 版本: 5.2.6
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- 数据库: `javaprojectdb`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `admin`
+--
+
+CREATE TABLE IF NOT EXISTS `admin` (
+  `username` varchar(20) COLLATE utf8_bin NOT NULL,
+  `password` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- 导出表中的数据 `admin`
+--
+
+INSERT INTO `admin` (`username`, `password`) VALUES
+('admin', '123');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `t_book`
+--
+
+CREATE TABLE IF NOT EXISTS `t_book` (
+  `barcode` varchar(20) COLLATE utf8_bin NOT NULL,
+  `bookName` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  `bookTypeId` int(11) DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `count` int(11) DEFAULT NULL,
+  `publish` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`barcode`),
+  KEY `FKCB4C8FF488CDAC05` (`bookTypeId`),
+  KEY `FKCB4C8FF4E3735507` (`bookTypeId`),
+  KEY `FKCB4C8FF45024537D` (`bookTypeId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- 导出表中的数据 `t_book`
+--
+
+INSERT INTO `t_book` (`barcode`, `bookName`, `bookTypeId`, `price`, `count`, `publish`) VALUES
+('TS001', 'asp.net程序设计', 1, 35.5, 12, '电子科技大学出版社'),
+('TS002', 'vb程序设计', 1, 25.8, 12, '成都理工大学出版社'),
+('TS003', '精通android程序设计', 1, 25, 19, '电子科技大学出版社'),
+('TS005', '中国古代史', 2, 23, 10, '成都理工大学出版社');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `t_booktype`
+--
+
+CREATE TABLE IF NOT EXISTS `t_booktype` (
+  `bookTypeId` int(11) NOT NULL AUTO_INCREMENT,
+  `bookTypeName` varchar(18) COLLATE utf8_bin DEFAULT NULL,
+  `days` int(11) DEFAULT NULL,
+  PRIMARY KEY (`bookTypeId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
+
+--
+-- 导出表中的数据 `t_booktype`
+--
+
+INSERT INTO `t_booktype` (`bookTypeId`, `bookTypeName`, `days`) VALUES
+(1, '计算机类', 30),
+(2, '历史类', 25);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `t_loaninfo`
+--
+
+CREATE TABLE IF NOT EXISTS `t_loaninfo` (
+  `loadId` int(11) NOT NULL AUTO_INCREMENT,
+  `barcode` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  `readerNo` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  `borrowTIme` varchar(10) COLLATE utf8_bin DEFAULT NULL,
+  `returnTIme` varchar(10) COLLATE utf8_bin DEFAULT NULL,
+  `address` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`loadId`),
+  KEY `FK29107D4978F887CB` (`readerNo`),
+  KEY `FK29107D49A3CF91AD` (`barcode`),
+  KEY `FK29107D49FB98894D` (`readerNo`),
+  KEY `FK29107D4962260BAF` (`barcode`),
+  KEY `FK29107D496A42AD43` (`readerNo`),
+  KEY `FK29107D491D4B525` (`barcode`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=4 ;
+
+--
+-- 导出表中的数据 `t_loaninfo`
+--
+
+INSERT INTO `t_loaninfo` (`loadId`, `barcode`, `readerNo`, `borrowTIme`, `returnTIme`, `address`) VALUES
+(1, 'TS003', 'DZ002', '2013-01-09', '2013-01-18', '图书馆'),
+(2, 'TS005', 'DZ002', '2013-01-08', '2013-01-19', NULL),
+(3, 'TS002', 'DZ002', '2013-01-09', '2013-01-24', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `t_reader`
+--
+
+CREATE TABLE IF NOT EXISTS `t_reader` (
+  `readerNo` varchar(20) COLLATE utf8_bin NOT NULL,
+  `readerTypeId` int(11) DEFAULT NULL,
+  `readerName` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  `readerSex` varchar(2) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`readerNo`),
+  KEY `FK4522970EC1B01E39` (`readerTypeId`),
+  KEY `FK4522970E98F8EBB` (`readerTypeId`),
+  KEY `FK4522970EDFAC7B1` (`readerTypeId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- 导出表中的数据 `t_reader`
+--
+
+INSERT INTO `t_reader` (`readerNo`, `readerTypeId`, `readerName`, `readerSex`) VALUES
+('DZ001', 1, '李工', '23'),
+('DZ002', 2, '高阳', '25');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `t_readertype`
+--
+
+CREATE TABLE IF NOT EXISTS `t_readertype` (
+  `readerTypeId` int(11) NOT NULL AUTO_INCREMENT,
+  `readerTypeName` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  `number` int(11) DEFAULT NULL,
+  PRIMARY KEY (`readerTypeId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
+
+--
+-- 导出表中的数据 `t_readertype`
+--
+
+INSERT INTO `t_readertype` (`readerTypeId`, `readerTypeName`, `number`) VALUES
+(1, '学生类', 3),
+(2, '老师类', 5);
+
+--
+-- 限制导出的表
+--
+
+--
+-- 限制表 `t_book`
+--
+ALTER TABLE `t_book`
+  ADD CONSTRAINT `FKCB4C8FF45024537D` FOREIGN KEY (`bookTypeId`) REFERENCES `t_booktype` (`bookTypeId`),
+  ADD CONSTRAINT `FKCB4C8FF488CDAC05` FOREIGN KEY (`bookTypeId`) REFERENCES `t_booktype` (`bookTypeId`),
+  ADD CONSTRAINT `FKCB4C8FF4E3735507` FOREIGN KEY (`bookTypeId`) REFERENCES `t_booktype` (`bookTypeId`);
+
+--
+-- 限制表 `t_loaninfo`
+--
+ALTER TABLE `t_loaninfo`
+  ADD CONSTRAINT `FK29107D491D4B525` FOREIGN KEY (`barcode`) REFERENCES `t_book` (`barcode`),
+  ADD CONSTRAINT `FK29107D4962260BAF` FOREIGN KEY (`barcode`) REFERENCES `t_book` (`barcode`),
+  ADD CONSTRAINT `FK29107D496A42AD43` FOREIGN KEY (`readerNo`) REFERENCES `t_reader` (`readerNo`),
+  ADD CONSTRAINT `FK29107D4978F887CB` FOREIGN KEY (`readerNo`) REFERENCES `t_reader` (`readerNo`),
+  ADD CONSTRAINT `FK29107D49A3CF91AD` FOREIGN KEY (`barcode`) REFERENCES `t_book` (`barcode`),
+  ADD CONSTRAINT `FK29107D49FB98894D` FOREIGN KEY (`readerNo`) REFERENCES `t_reader` (`readerNo`);
+
+--
+-- 限制表 `t_reader`
+--
+ALTER TABLE `t_reader`
+  ADD CONSTRAINT `FK4522970EDFAC7B1` FOREIGN KEY (`readerTypeId`) REFERENCES `t_readertype` (`readerTypeId`),
+  ADD CONSTRAINT `FK4522970E98F8EBB` FOREIGN KEY (`readerTypeId`) REFERENCES `t_readertype` (`readerTypeId`),
+  ADD CONSTRAINT `FK4522970EC1B01E39` FOREIGN KEY (`readerTypeId`) REFERENCES `t_readertype` (`readerTypeId`);
