@@ -47,7 +47,38 @@
            </action>
          </package>
 
-	 	 
+         <!-- ReaderTypeAction配置 -->
+         <package name="ReaderType" namespace="/ReaderType" extends="struts-default">
+           <action name="ReaderType_*" class="com.action.ReaderTypeAction" method="{1}">
+             <result name="add_view">/ReaderType_add.jsp</result>
+             <result name="input">/ReaderType_add.jsp</result>
+             <result name="add_success">/message.jsp</result>
+             <result name="delete_success">/message.jsp</result>
+             <result name="modify_success">/message.jsp</result>
+             <result name="error">/error.jsp</result>
+             <result name="query_view">/ReaderType_query_result.jsp</result>
+             <result name="modify_view">/ReaderType_modify.jsp</result>
+           </action>
+         </package>
+
+         <!-- ReaderAction配置 -->
+         <package name="Reader" namespace="/Reader" extends="struts-default">
+           <action name="Reader_*" class="com.action.ReaderAction" method="{1}">
+             <result name="add_view">/Reader_add.jsp</result>
+             <result name="input">/Reader_add.jsp</result>
+             <result name="add_success">/message.jsp</result>
+             <result name="delete_success">/message.jsp</result>
+             <result name="modify_success">/message.jsp</result>
+             <result name="error">/error.jsp</result>
+             <result name="query_view">/Reader_query_result.jsp</result>
+             <result name="modify_view">/Reader_modify.jsp</result>
+           </action>
+         </package>
+
+      
+
+	 
+	 
 
  	 <package name="password" namespace="/password" extends="struts-default">
 	        <action name="ChangePassword" class="com.action.ChangePasswordAction">  
