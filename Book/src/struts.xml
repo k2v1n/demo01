@@ -75,7 +75,20 @@
            </action>
          </package>
 
-      
+         <!-- LoanInfoAction配置 -->
+         <package name="LoanInfo" namespace="/LoanInfo" extends="struts-default">
+           <action name="LoanInfo_*" class="com.action.LoanInfoAction" method="{1}">
+             <result name="add_view">/LoanInfo_add.jsp</result>
+             <result name="input">/LoanInfo_add.jsp</result>
+             <result name="add_success">/message.jsp</result>
+             <result name="delete_success">/message.jsp</result>
+             <result name="modify_success">/message.jsp</result>
+             <result name="error">/error.jsp</result>
+             <result name="query_view">/LoanInfo_query_result.jsp</result>
+             <result name="modify_view">/LoanInfo_modify.jsp</result>
+           </action>
+         </package>
+
 
 	 
 	 
